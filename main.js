@@ -72,14 +72,16 @@
     const walk = (node, into) => {
       node.childNodes.forEach(child => {
         if (child.nodeType === 3) {
-          child.textContent.split(/(\s+)/).forEach(part => {
+          child.textContent.split(/([ \t\n\r]+)/).forEach(part => {
             if (!part) return;
-            if (/^\s+$/.test(part)) { into.appendChild(document.createTextNode(' ')); return; }
+            if (/^[ \t\n\r]+$/.test(part)) { into.appendChild(document.createTextNode(' ')); return; }
             const w = document.createElement('span'); w.className = 'w';
             const i = document.createElement('span'); i.textContent = part;
             w.appendChild(i); into.appendChild(w);
           });
         } else if (child.nodeType === 1) {
+          // Mobile hides <br>, so keep a real space beside it
+          if (child.nodeName === 'BR') into.appendChild(document.createTextNode(' '));
           const clone = child.cloneNode(false);
           walk(child, clone);
           into.appendChild(clone);
@@ -110,10 +112,21 @@
       .from('.nav__inner', { y: -20, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=1.3');
     gsap.set('.loader', { clipPath: 'inset(0 0 0% 0)' });
   };
-  if (loader && lenis) lenis.stop();
+  // Phones and tablets (mostly ad traffic) skip the loader: the page is usable the moment it paints
+  const quickIntro = () => {
+    loader && loader.remove();
+    ready();
+    if (!hasGsap || reduced) return;
+    gsap.from('.hero__title .w > span', { yPercent: 110, duration: 0.9, stagger: 0.04, ease: 'expo.out', clearProps: 'transform' });
+    gsap.from('.hero__lead, .enquiry', { y: 24, opacity: 0, duration: 0.8, stagger: 0.12, delay: 0.2, ease: 'power3.out', clearProps: 'transform,opacity' });
+  };
+  if (!isDesktop()) setTimeout(quickIntro);
+  if (loader && lenis && isDesktop()) lenis.stop();
   const begin = () => { intro(); setTimeout(() => lenis && !document.body.classList.contains('menu-open') && lenis.start(), 2200); };
   // setTimeout lets the slideshow code below finish setting up first
-  if (document.readyState === 'complete') setTimeout(begin); else window.addEventListener('load', begin);
+  if (isDesktop()) {
+    if (document.readyState === 'complete') setTimeout(begin); else window.addEventListener('load', begin);
+  }
   // Never let the loader hang on a slow network
   setTimeout(() => { if (document.body.contains(loader)) { loader.remove(); ready(); lenis && lenis.start(); } }, 6000);
 
@@ -273,10 +286,12 @@
   }, { passive: true });
 
   /* ---------- Experience section: 360° Pannellum viewer ---------- */
-  if (document.getElementById('pano360') && typeof pannellum !== 'undefined') {
+  const panoEl = document.getElementById('pano360');
+  const initPano = () => {
     pannellum.viewer('pano360', {
       type: 'equirectangular',
-      panorama: 'pano.jpeg',
+      // Most phone GPUs cap textures at 4096px, so the 8K original would fail to render there
+      panorama: window.matchMedia('(min-width: 1081px)').matches ? 'pano.jpeg' : 'pano-4k.jpg',
       autoLoad: true,
       autoRotate: -2,
       autoRotateInactivityDelay: 3000,
@@ -284,20 +299,41 @@
       showZoomCtrl: false,
       showFullscreenCtrl: false,
       showControls: false,
-      mouseZoom: true,
+      mouseZoom: false,
       touchPanSpeedCoeffFactor: 1,
-      hfov: 90,
+      hfov: isDesktop() ? 90 : 100,
       minHfov: 50,
       maxHfov: 120,
       pitch: 0,
       yaw: 0,
       friction: 0.15,
-      strings: {
-        loadButtonLabel: 'Click to<br>Load Panorama',
-        loadingLabel: 'Loading…',
-        bylineLabel: '',
-      },
+      strings: { loadButtonLabel: 'Click to<br>Load Panorama', loadingLabel: 'Loading…', bylineLabel: '' },
     });
+  };
+  if (panoEl && typeof pannellum !== 'undefined') {
+    // Download the panorama only when the visitor is about to reach it
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(entries => {
+        if (entries.some(e => e.isIntersecting)) { io.disconnect(); initPano(); }
+      }, { rootMargin: '600px 0px' });
+      io.observe(panoEl);
+    } else initPano();
+  }
+
+  /* ---------- Mobile sticky CTA bar ---------- */
+  const mbar = $('.mbar');
+  const enquiryBox = $('#enquire');
+  if (mbar && enquiryBox && 'IntersectionObserver' in window) {
+    let formVisible = true, heroVisible = true;
+    const sync = () => {
+      const show = !formVisible && !heroVisible && !document.body.classList.contains('menu-open');
+      mbar.classList.toggle('is-on', show);
+      mbar.setAttribute('aria-hidden', show ? 'false' : 'true');
+      $('.mbar__cta', mbar).tabIndex = show ? 0 : -1;
+    };
+    new IntersectionObserver(([e]) => { formVisible = e.isIntersecting; sync(); }).observe(enquiryBox);
+    new IntersectionObserver(([e]) => { heroVisible = e.isIntersecting; sync(); }, { threshold: 0.15 }).observe($('.hero__copy'));
+    new MutationObserver(sync).observe(document.body, { attributes: true, attributeFilter: ['class'] });
   }
 
   /* ---------- Cursor ---------- */
