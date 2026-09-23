@@ -272,66 +272,33 @@
     $('.work__bar i').style.transform = `scaleX(${0.08 + p * 0.92})`;
   }, { passive: true });
 
-  /* ---------- Experience section: 3D model, with a flat-photo pan as fallback ---------- */
-  const pano = $('.pano');
-  const panoImg = $('.pano__img');
-  const compass = $('.pano__compass');
-  const compassIcon = $('i', compass);
-  const panoHint = $('.pano__hint');
-  const model = $('#campusModel');
-  const defaultOrbit = model && model.getAttribute('camera-orbit');
-
-  // model/campus.glb doesn't exist until the user adds it — model-viewer just fires
-  // 'error' in that case, and the section quietly stays on the photo fallback below.
-  if (model) {
-    model.addEventListener('load', () => {
-      pano.classList.add('is-3d');
-      panoHint.innerHTML = '<i class="ph-light ph-hand-grabbing"></i>Drag to orbit';
-      compassIcon.style.transform = '';
-      compassIcon.className = 'ph-light ph-arrow-counter-clockwise';
-      compass.setAttribute('aria-label', 'Reset view');
-      compass.classList.add('pano__compass--reset');
-    });
-    compass.addEventListener('click', () => {
-      if (!pano.classList.contains('is-3d')) return;
-      model.cameraOrbit = defaultOrbit;
-      model.fieldOfView = 'auto';
+  /* ---------- Experience section: 360° Pannellum viewer ---------- */
+  if (document.getElementById('pano360') && typeof pannellum !== 'undefined') {
+    pannellum.viewer('pano360', {
+      type: 'equirectangular',
+      panorama: 'pano.jpeg',
+      autoLoad: true,
+      autoRotate: -2,
+      autoRotateInactivityDelay: 3000,
+      compass: false,
+      showZoomCtrl: false,
+      showFullscreenCtrl: false,
+      showControls: false,
+      mouseZoom: true,
+      touchPanSpeedCoeffFactor: 1,
+      hfov: 90,
+      minHfov: 50,
+      maxHfov: 120,
+      pitch: 0,
+      yaw: 0,
+      friction: 0.15,
+      strings: {
+        loadButtonLabel: 'Click to<br>Load Panorama',
+        loadingLabel: 'Loading…',
+        bylineLabel: '',
+      },
     });
   }
-
-  let bgW = 0, pos = 0, target = 0, dragging = false, startX = 0, startPos = 0, dir = -1, lastInteract = 0;
-  const sizePano = () => {
-    const h = pano.clientHeight, w = pano.clientWidth;
-    bgW = Math.max(w * 1.9, h * (16 / 9));
-    panoImg.style.backgroundSize = `${bgW}px auto`;
-    const minPos = w - bgW;
-    if (!pos) pos = target = minPos / 2;
-    pos = target = Math.min(0, Math.max(minPos, target));
-  };
-  sizePano();
-  window.addEventListener('resize', sizePano);
-  // Once the 3D model is live it owns pointer input, so the photo-pan step aside entirely
-  const is3d = () => pano.classList.contains('is-3d');
-  pano.addEventListener('pointerdown', e => { if (is3d()) return; dragging = true; startX = e.clientX; startPos = target; pano.setPointerCapture(e.pointerId); lastInteract = performance.now(); });
-  pano.addEventListener('pointermove', e => { if (is3d() || !dragging) return; target = startPos + (e.clientX - startX) * 1.4; lastInteract = performance.now(); });
-  const endDrag = () => { dragging = false; };
-  pano.addEventListener('pointerup', endDrag);
-  pano.addEventListener('pointercancel', endDrag);
-  const panoLoop = now => {
-    if (is3d()) { requestAnimationFrame(panoLoop); return; }
-    const minPos = pano.clientWidth - bgW;
-    if (!dragging && !reduced && now - lastInteract > 2500) {
-      target += dir * 0.35;
-      if (target <= minPos) dir = 1;
-      if (target >= 0) dir = -1;
-    }
-    target = Math.min(0, Math.max(minPos, target));
-    pos += (target - pos) * 0.08;
-    panoImg.style.backgroundPosition = `${pos}px center`;
-    if (minPos < 0) compassIcon.style.transform = `rotate(${(pos / minPos - 0.5) * 120}deg)`;
-    requestAnimationFrame(panoLoop);
-  };
-  requestAnimationFrame(panoLoop);
 
   /* ---------- Cursor ---------- */
   const cursor = $('.cursor');
