@@ -2,7 +2,7 @@
 
 Short copy that fits the current design's sections and drives every visitor to one action: **the free test-fit.**
 
-**Confirm before publishing (no numbers invented):** total campuses `[X]` · sq ft `[X]` · on-time `[X]%` · years `[X]` · Birkbeck case-study detail · email · phone. Cities are confirmed: New Delhi, Bengaluru, Mumbai, Gurugram (+ Dubai, Birmingham in development).
+**Confirmed:** 4 institutional clients (1 campus delivered, others showcased) · 5L+ sq ft fitted out · 100% delivered on date · Birkbeck Bengaluru case study: 40,000 sq ft, 12 weeks, 1,500 students · email business@airbrickinfra.com · phone +91 81552 28822. Cities: New Delhi, Bengaluru, Mumbai, Gurugram (+ Dubai, Birmingham in development).
 
 ---
 
@@ -33,7 +33,7 @@ New Delhi · Bengaluru · Mumbai · Gurugram · Dubai · Birmingham
 - **Eyebrow:** THE CHALLENGE
 - **H2:** The building runs on the property's clock. **Your students run on yours.**
 - **One line:** Campuses in India stall between fragmented vendors and shifting timelines — while the admissions date can't move.
-- **Stats:** `[X]+` Campuses delivered · `4` Cities in India · `[X]` Sq ft fitted out · `[X]%` Delivered on date
+- **Stats:** `4+` Institutional clients · `4` Cities in India · `5L+` Sq ft fitted out · `100%` Delivered on date
 
 ### 4. Clients
 - **H2:** Trusted by institutions **building in India.**
@@ -88,7 +88,7 @@ _(Founder: rename any card to a real delivered project.)_
 ### 12. Footer
 - **Tagline:** From campus vision to operational reality.
 - **Blurb:** Foreign university campuses in India — cohort-ready, under one contract.
-- Columns — **Explore:** Challenge · Model · Capabilities · Track Record · **Locations:** New Delhi · Bengaluru · Mumbai · Gurugram · Dubai · Birmingham · **Contact:** [email] · [phone]
+- Columns — **Explore:** Challenge · Model · Capabilities · Track Record · **Locations:** New Delhi · Bengaluru · Mumbai · Gurugram · Dubai · Birmingham · **Contact:** business@airbrickinfra.com · +91 81552 28822
 - © 2026 AirBrick.
 
 ### Microcopy
