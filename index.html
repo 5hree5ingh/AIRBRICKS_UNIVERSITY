@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AirBrick — Foreign University Campuses in India</title>
+  <meta name="description" content="We design, engineer and build international university campuses inside Grade-A buildings across India — cohort-ready, under one contract. Start with a free test-fit." />
+  <link rel="icon" type="image/png" href="logo-mark.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <script>document.documentElement.classList.add('js');</script>
+  <!-- 3D room viewer for the "Step Inside" section — reads model/campus.glb once it's added -->
+  <script type="module" src="https://unpkg.com/@google/model-viewer@4.0.0/dist/model-viewer.min.js"></script>
+</head>
+<body>
+
+  <!-- ============ LOADER ============ -->
+  <div class="loader" aria-hidden="true">
+    <div class="loader__inner">
+      <img class="loader__mark" src="Airbrick_Logo.png" alt="" />
+      <div class="loader__bar"><i></i></div>
+    </div>
+  </div>
+
+  <!-- ============ CURSOR ============ -->
+  <div class="cursor" aria-hidden="true"><span class="cursor__label">View</span></div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="#top" class="brand" aria-label="AirBrick Infra home">
+        <img class="brand__logo" src="Airbrick_Logo.png" alt="" />
+      </a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="#challenge">Challenge</a>
+        <a href="#model">Model</a>
+        <a href="#capabilities">Capabilities</a>
+        <a href="#clients">Track Record</a>
+      </nav>
+      <a href="#enquire" class="btn btn--dark nav__cta">
+        <span>Book a Test-Fit</span>
+        <span class="btn__icon"><i class="ph ph-arrow-up-right"></i></span>
+      </a>
+      <button class="nav__burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <div class="menu" aria-hidden="true">
+    <nav class="menu__links">
+      <a href="#challenge"><small>01</small>Challenge</a>
+      <a href="#model"><small>02</small>Model</a>
+      <a href="#capabilities"><small>03</small>Capabilities</a>
+      <a href="#clients"><small>04</small>Track Record</a>
+      <a href="#enquire"><small>05</small>Book a Test-Fit</a>
+    </nav>
+  </div>
+
+  <main id="top">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="hero__media">
+        <div class="hero__slide is-active"><img src="a2.png" alt="University library with backlit timber shelving" /></div>
+        <div class="hero__slide"><img data-src="a4.png" alt="Reception lounge with a timber grid ceiling" /></div>
+        <div class="hero__slide"><img data-src="a1.png" alt="Tiered auditorium with crimson seats" /></div>
+        <div class="hero__slide"><img data-src="a3.png" alt="Student lounge with lantern pendants" /></div>
+        <div class="hero__slide"><img data-src="a5.png" alt="Computer lab with keyboard mural and ring lights" /></div>
+        <div class="hero__slide"><img data-src="5.webp" alt="Breakout zone with tree planter seating" /></div>
+        <div class="hero__slide"><img data-src="4%20(1).webp" alt="Flexible learning hall with halo ceiling lights" /></div>
+        <div class="hero__slide"><img data-src="9.webp" alt="Open learning arena with tiered platform seating" /></div>
+        <div class="hero__slide"><img data-src="6.webp" alt="Cafe with fluted green column" /></div>
+        <div class="hero__slide"><img data-src="8.webp" alt="Seminar room with acoustic disc panels" /></div>
+      </div>
+      <div class="hero__shade" aria-hidden="true"></div>
+
+      <div class="container hero__inner">
+        <div class="hero__copy">
+          <span class="pill pill--hero"><i class="dot"></i>Foreign University Campuses · Delivered in India</span>
+          <h1 class="hero__title split">We build foreign<br />university campuses<br />in India — <span class="hero__soft">cohort-ready.</span></h1>
+          <p class="hero__lead">One contract. From academic brief to opening day.</p>
+          <a href="#model" class="hero__link">See how we deliver <i class="ph ph-arrow-down-right"></i></a>
+        </div>
+
+        <div class="enquiry" id="enquire">
+          <form class="enquiry__form" novalidate>
+            <div class="enquiry__head">
+              <h2>Request a free test-fit</h2>
+              <p>Space plan, seat counts, indicative cost — in 10 working days, at our expense.</p>
+            </div>
+
+            <div class="enquiry__grid">
+              <label class="field">
+                <span>Institution</span>
+                <input name="institution" type="text" autocomplete="organization" placeholder="University name" required />
+                <small></small>
+              </label>
+              <label class="field">
+                <span>Your Name</span>
+                <input name="fullname" type="text" autocomplete="name" placeholder="Full name" required />
+                <small></small>
+              </label>
+              <label class="field">
+                <span>Role</span>
+                <input name="role" type="text" autocomplete="organization-title" placeholder="e.g. Director, International" required />
+                <small></small>
+              </label>
+              <label class="field">
+                <span>Work Email</span>
+                <input name="email" type="email" autocomplete="email" placeholder="you@university.edu" required />
+                <small></small>
+              </label>
+              <label class="field">
+                <span>Phone</span>
+                <input name="mobile" type="tel" inputmode="tel" autocomplete="tel" placeholder="+91 98765 43210" required />
+                <small></small>
+              </label>
+              <label class="field field--select">
+                <span>Target City</span>
+                <select name="city" required>
+                  <option value="" disabled selected>Select city</option>
+                  <option>New Delhi</option>
+                  <option>Bengaluru</option>
+                  <option>Mumbai</option>
+                  <option>Gurugram</option>
+                  <option>Other</option>
+                </select>
+                <i class="ph ph-caret-down" aria-hidden="true"></i>
+                <small></small>
+              </label>
+              <label class="field field--select">
+                <span>First-Cohort Date</span>
+                <select name="cohort" required>
+                  <option value="" disabled selected>Select timing</option>
+                  <option>Within 6 months</option>
+                  <option>6–12 months</option>
+                  <option>12–18 months</option>
+                  <option>Exploring</option>
+                </select>
+                <i class="ph ph-caret-down" aria-hidden="true"></i>
+                <small></small>
+              </label>
+              <label class="field field--select">
+                <span>Capacity</span>
+                <select name="capacity" required>
+                  <option value="" disabled selected>Select students</option>
+                  <option>Under 250</option>
+                  <option>250–500</option>
+                  <option>500–1,000</option>
+                  <option>1,000+</option>
+                </select>
+                <i class="ph ph-caret-down" aria-hidden="true"></i>
+                <small></small>
+              </label>
+            </div>
+
+            <button type="submit" class="btn btn--dark enquiry__submit">
+              <span class="enquiry__submit-label">Request my test-fit</span>
+              <span class="btn__icon"><i class="ph ph-arrow-right"></i></span>
+            </button>
+            <p class="enquiry__error" role="alert" hidden>Couldn’t send. Please retry or email hello@airbrickinfra.com.</p>
+            <p class="enquiry__note"><i class="ph-light ph-seal-check"></i>No cost. No obligation.</p>
+          </form>
+
+          <div class="enquiry__success" aria-live="polite" hidden>
+            <span class="enquiry__success-icon"><i class="ph-light ph-check"></i></span>
+            <h3>Thank you<span class="enquiry__success-name"></span>.</h3>
+            <p>Your test-fit request is in. We’ll confirm your brief within two working days.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>New Delhi</span><i class="ph-light ph-diamond"></i>
+        <span>Bengaluru</span><i class="ph-light ph-diamond"></i>
+        <span>Mumbai</span><i class="ph-light ph-diamond"></i>
+        <span>Gurugram</span><i class="ph-light ph-diamond"></i>
+        <span>Dubai</span><i class="ph-light ph-diamond"></i>
+        <span>Birmingham</span><i class="ph-light ph-diamond"></i>
+        <span>New Delhi</span><i class="ph-light ph-diamond"></i>
+        <span>Bengaluru</span><i class="ph-light ph-diamond"></i>
+        <span>Mumbai</span><i class="ph-light ph-diamond"></i>
+        <span>Gurugram</span><i class="ph-light ph-diamond"></i>
+        <span>Dubai</span><i class="ph-light ph-diamond"></i>
+        <span>Birmingham</span><i class="ph-light ph-diamond"></i>
+      </div>
+    </div>
+
+    <!-- ============ THE CHALLENGE ============ -->
+    <section class="section studio" id="challenge">
+      <div class="container">
+        <div class="sec-head">
+          <div class="sec-head__label"><span class="pill pill--sm"><i class="dot"></i>The Challenge</span></div>
+          <div class="sec-head__main">
+            <h2 class="h2 split">The building runs on<br />the property’s clock.<br /><span class="teal">Your students run on yours.</span></h2>
+            <p class="lead" data-reveal>Campuses in India stall between fragmented vendors and shifting timelines — while the admissions date can’t move.</p>
+          </div>
+        </div>
+
+        <!-- X = placeholder: founder to confirm campuses, sq ft and on-time figures -->
+        <div class="stats">
+          <div class="stat" data-reveal>
+            <div class="stat__num"><span class="stat__ph">X</span><em>+</em></div>
+            <div class="stat__label">Campuses delivered</div>
+          </div>
+          <div class="stat" data-reveal>
+            <div class="stat__num"><span data-count="4">0</span></div>
+            <div class="stat__label">Cities in India</div>
+          </div>
+          <div class="stat" data-reveal>
+            <div class="stat__num"><span class="stat__ph">X</span><em>sq ft</em></div>
+            <div class="stat__label">Fitted out</div>
+          </div>
+          <div class="stat" data-reveal>
+            <div class="stat__num"><span class="stat__ph">X</span><em>%</em></div>
+            <div class="stat__label">Delivered on date</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CLIENTS / TRACK RECORD ============ -->
+    <section class="clients" id="clients">
+      <div class="container">
+        <div class="sec-head">
+          <div class="sec-head__label"><span class="pill pill--sm"><i class="dot"></i>Track Record</span></div>
+          <div class="sec-head__main">
+            <h2 class="h2 split">Trusted by institutions<br /><span class="teal">building in India.</span></h2>
+          </div>
+        </div>
+        <ul class="clients__grid">
+          <li class="client"><img src="birkbeck.jpeg" alt="Birkbeck, University of London" loading="lazy" /></li>
+          <li class="client"><img src="lsbf.png" alt="LSBF Education, London School of Business &amp; Finance" loading="lazy" /></li>
+          <li class="client client--padded"><img src="eca.png" alt="ECA" loading="lazy" /></li>
+          <li class="client"><img src="suncity.png" alt="Suncity Projects" loading="lazy" /></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ PROJECTS ============ -->
+    <section class="work" id="work">
+      <div class="work__pin">
+        <div class="container work__head">
+          <div class="sec-head">
+            <div class="sec-head__label"><span class="pill pill--sm"><i class="dot"></i>Our Work</span></div>
+            <div class="sec-head__main">
+              <h2 class="h2 split">Every space a campus needs.<br /><span class="teal">Delivered to one date.</span></h2>
+              <p class="small-lead" data-reveal>Lecture theatres to libraries — designed, built and handed over under one contract.</p>
+            </div>
+          </div>
+          <div class="work__nav" data-reveal>
+            <div class="work__bar"><i></i></div>
+            <span class="work__hint"><i class="ph-light ph-arrows-horizontal"></i> Scroll to explore</span>
+          </div>
+        </div>
+
+        <div class="work__viewport">
+          <div class="work__track">
+            <article class="card" data-index="0">
+              <div class="card__media" data-cursor="view">
+                <img src="a1.png" alt="Tiered lecture theatre with crimson seats" loading="lazy" />
+                <div class="card__tags"><span>Teaching</span><span>Acoustics</span></div>
+              </div>
+              <h3>Lecture Theatre</h3>
+              <p>Tiered seating, AV-ready</p>
+            </article>
+            <article class="card" data-index="1">
+              <div class="card__media" data-cursor="view">
+                <img src="a2.png" alt="Library with backlit timber shelving" loading="lazy" />
+                <div class="card__tags"><span>Study</span><span>Joinery</span></div>
+              </div>
+              <h3>Library &amp; Study</h3>
+              <p>Quiet zones, backlit shelving</p>
+            </article>
+            <article class="card" data-index="2">
+              <div class="card__media" data-cursor="view">
+                <img src="a5.png" alt="Computer lab with keyboard mural and ring lights" loading="lazy" />
+                <div class="card__tags"><span>Lab</span><span>IT</span></div>
+              </div>
+              <h3>Computer Lab</h3>
+              <p>Service-ready, fully networked</p>
+            </article>
+            <article class="card" data-index="3">
+              <div class="card__media" data-cursor="view">
+                <img src="a3.png" alt="Student lounge with lantern pendants" loading="lazy" />
+                <div class="card__tags"><span>Student Life</span><span>Lounge</span></div>
+              </div>
+              <h3>Student Lounge</h3>
+              <p>Social space between classes</p>
+            </article>
+            <article class="card" data-index="4">
+              <div class="card__media" data-cursor="view">
+                <img src="8.webp" alt="Seminar room with acoustic disc panels" loading="lazy" />
+                <div class="card__tags"><span>Teaching</span><span>Flexible</span></div>
+              </div>
+              <h3>Seminar Room</h3>
+              <p>Reconfigurable in minutes</p>
+            </article>
+            <article class="card" data-index="5">
+              <div class="card__media" data-cursor="view">
+                <img src="4%20(1).webp" alt="Flexible learning hall with halo ceiling lights" loading="lazy" />
+                <div class="card__tags"><span>Teaching</span><span>Collaborative</span></div>
+              </div>
+              <h3>Classroom</h3>
+              <p>Group work to lecture mode</p>
+            </article>
+            <article class="card" data-index="6">
+              <div class="card__media" data-cursor="view">
+                <img src="a4.png" alt="Reception lounge with a timber grid ceiling" loading="lazy" />
+                <div class="card__tags"><span>Arrival</span><span>Identity</span></div>
+              </div>
+              <h3>Reception</h3>
+              <p>A first impression in your crest</p>
+            </article>
+            <article class="card" data-index="7">
+              <div class="card__media" data-cursor="view">
+                <img src="9.webp" alt="Open learning arena with tiered platform seating" loading="lazy" />
+                <div class="card__tags"><span>Events</span><span>Flexible</span></div>
+              </div>
+              <h3>Learning Arena</h3>
+              <p>Talks, events and open study</p>
+            </article>
+            <article class="card" data-index="8">
+              <div class="card__media" data-cursor="view">
+                <img src="6.webp" alt="Cafe with fluted green column" loading="lazy" />
+                <div class="card__tags"><span>Student Life</span><span>F&amp;B</span></div>
+              </div>
+              <h3>Café</h3>
+              <p>Where campus comes together</p>
+            </article>
+            <div class="card card--end">
+              <a href="#enquire" class="card-end">
+                <span class="card-end__icon"><i class="ph-light ph-arrow-up-right"></i></span>
+                <b>Your campus<br />could be next</b>
+                <span>Book a free test-fit</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BIG WORD ============ -->
+    <section class="bigword" aria-label="AirBrick delivery model">
+      <div class="bigword__text" aria-hidden="true">AIRBRICK</div>
+      <div class="container">
+        <div class="bigword__frame">
+          <img src="a5.png" alt="AirBrick-delivered computer lab with suspended light rafts" loading="lazy" />
+          <div class="bigword__chips">
+            <span class="glass"><i class="ph-light ph-handshake"></i>Single contract</span>
+            <span class="glass"><i class="ph-light ph-buildings"></i>Grade-A buildings</span>
+            <span class="glass"><i class="ph-light ph-calendar-check"></i>Cohort-ready</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CAPABILITIES ============ -->
+    <section class="section expertise" id="capabilities">
+      <div class="container">
+        <div class="sec-head">
+          <div class="sec-head__label"><span class="pill pill--sm"><i class="dot"></i>Capabilities</span></div>
+          <div class="sec-head__main">
+            <h2 class="h2 split">Everything between a lease<br /><span class="teal">and a working campus.</span></h2>
+          </div>
+        </div>
+
+        <div class="services">
+          <article class="service" data-reveal>
+            <div class="service__top"><span class="service__icon"><i class="ph-light ph-layout"></i></span><span class="service__no">01</span></div>
+            <h3>Space Planning</h3>
+            <p>Your academic brief into seats and rooms.</p>
+          </article>
+          <article class="service" data-reveal>
+            <div class="service__top"><span class="service__icon"><i class="ph-light ph-pencil-ruler"></i></span><span class="service__no">02</span></div>
+            <h3>Design &amp; Engineering</h3>
+            <p>Architecture, interiors and full MEP.</p>
+          </article>
+          <article class="service" data-reveal>
+            <div class="service__top"><span class="service__icon"><i class="ph-light ph-currency-inr"></i></span><span class="service__no">03</span></div>
+            <h3>Cost Certainty</h3>
+            <p>One contracted number, from day one.</p>
+          </article>
+          <article class="service" data-reveal>
+            <div class="service__top"><span class="service__icon"><i class="ph-light ph-hard-hat"></i></span><span class="service__no">04</span></div>
+            <h3>Procurement &amp; Build</h3>
+            <p>One supply chain. One fixed date.</p>
+          </article>
+          <article class="service" data-reveal>
+            <div class="service__top"><span class="service__icon"><i class="ph-light ph-seal-check"></i></span><span class="service__no">05</span></div>
+            <h3>Approvals &amp; Compliance</h3>
+            <p>Codes and permits, handled.</p>
+          </article>
+          <article class="service" data-reveal>
+            <div class="service__top"><span class="service__icon"><i class="ph-light ph-monitor-play"></i></span><span class="service__no">06</span></div>
+            <h3>AV, IT &amp; Learning Tech</h3>
+            <p>Built in, not bolted on.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ THE TEST-FIT ============ -->
+    <section class="section philosophy" id="testfit">
+      <div class="container">
+        <div class="sec-head">
+          <div class="sec-head__label"><span class="pill pill--sm"><i class="dot"></i>Free Test-Fit</span></div>
+          <div class="sec-head__main">
+            <h2 class="h2 split">See your campus<br /><span class="teal">before you commit.</span></h2>
+          </div>
+        </div>
+
+        <div class="philo">
+          <div class="philo__media" data-reveal-img>
+            <img src="5.webp" alt="Breakout zone with a central tree and circular seating" loading="lazy" data-parallax />
+          </div>
+          <div class="philo__body">
+            <div class="philo__score" data-reveal>
+              <div class="philo__big">10<em>days</em></div>
+              <div class="philo__score-meta">
+                <span class="philo__tag">Free test-fit</span>
+                <p>Send your academic brief. Get a space plan, seat counts and an indicative cost — at our expense.</p>
+              </div>
+            </div>
+            <blockquote class="philo__quote" data-reveal>
+              “A campus should open on the academic calendar — not the property market’s.”
+            </blockquote>
+            <div class="philo__author" data-reveal>
+              <img class="philo__avatar" src="logo-mark.png" alt="" />
+              <div><b>The AirBrick delivery principle</b><span>From campus vision to operational reality</span></div>
+            </div>
+            <a href="#enquire" class="btn btn--dark philo__cta" data-reveal><span>Book a free test-fit</span><span class="btn__icon"><i class="ph ph-arrow-up-right"></i></span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ OUR MODEL ============ -->
+    <section class="section process" id="model">
+      <div class="container">
+        <div class="sec-head">
+          <div class="sec-head__label"><span class="pill pill--sm"><i class="dot"></i>Our Model</span></div>
+          <div class="sec-head__main">
+            <h2 class="h2 split">One contract.<br /><span class="teal">Brief to opening day.</span></h2>
+          </div>
+        </div>
+
+        <ol class="steps">
+          <li class="step" data-reveal>
+            <span class="step__no">01</span>
+            <span class="step__icon"><i class="ph-light ph-ruler"></i></span>
+            <h3>Test-Fit</h3>
+            <p>Plan, seats and cost in 10 days, free.</p>
+          </li>
+          <li class="step" data-reveal>
+            <span class="step__no">02</span>
+            <span class="step__icon"><i class="ph-light ph-pencil-ruler"></i></span>
+            <h3>Design &amp; Engineer</h3>
+            <p>Detailed and building-specific.</p>
+          </li>
+          <li class="step" data-reveal>
+            <span class="step__no">03</span>
+            <span class="step__icon"><i class="ph-light ph-hard-hat"></i></span>
+            <h3>Procure &amp; Build</h3>
+            <p>Managed to a fixed date.</p>
+          </li>
+          <li class="step" data-reveal>
+            <span class="step__no">04</span>
+            <span class="step__icon"><i class="ph-light ph-key"></i></span>
+            <h3>Handover</h3>
+            <p>Snag-free and cohort-ready.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ EXPERIENCE (3D MODEL) ============ -->
+    <section class="section experience" id="experience">
+      <div class="container">
+        <div class="center-head">
+          <span class="pill pill--sm"><i class="dot"></i>Interactive 3D</span>
+          <h2 class="h2 split">Step inside an<br /><span class="teal">AirBrick campus</span></h2>
+        </div>
+
+        <div class="pano" data-cursor="drag" data-reveal-img>
+          <!-- Reads model/campus.glb — see model/README.txt. Falls back to the photo below until that file exists. -->
+          <model-viewer
+            id="campusModel"
+            class="pano__model"
+            src="model/campus.glb"
+            poster="9.webp"
+            alt="3D walkthrough of an AirBrick-delivered learning arena"
+            camera-controls
+            touch-action="pan-y"
+            auto-rotate
+            auto-rotate-delay="2200"
+            rotation-per-second="10deg"
+            interaction-prompt="none"
+            shadow-intensity="1"
+            exposure="1.05"
+            camera-orbit="-25deg 78deg 105%"
+            min-camera-orbit="auto auto 80%"
+            max-camera-orbit="auto auto 160%"
+          ></model-viewer>
+
+          <!-- Shown only if model/campus.glb hasn't been added yet -->
+          <div class="pano__img" role="img" aria-label="Panoramic view of an open learning arena with tiered platform seating"></div>
+          <div class="pano__placeholder glass">
+            <i class="ph-light ph-cube"></i>
+            <b>3D walkthrough coming soon</b>
+            <span>Add <code>model/campus.glb</code> to switch this on</span>
+          </div>
+
+          <div class="pano__hud">
+            <span class="glass pano__hint"><i class="ph-light ph-hand-grabbing"></i>Drag to look around</span>
+            <span class="glass pano__label"><b>Learning Arena</b><small>Open learning &amp; events</small></span>
+          </div>
+          <div class="pano__compass glass"><i class="ph-light ph-navigation-arrow"></i></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FINAL CTA ============ -->
+    <section class="cta" id="contact">
+      <div class="container">
+        <div class="cta__box">
+          <div class="cta__grid-lines" aria-hidden="true"></div>
+          <div class="cta__content">
+            <span class="pill pill--dark"><i class="dot"></i>Start a Project</span>
+            <h2 class="cta__title split">Your first cohort<br />has a start date.<br /><span class="teal">Your campus should too.</span></h2>
+            <p>Start with a free test-fit — a clear plan and real numbers you can take to your board.</p>
+            <div class="cta__actions">
+              <a href="#enquire" class="btn btn--teal"><span>Book a free test-fit</span><span class="btn__icon"><i class="ph ph-arrow-up-right"></i></span></a>
+              <a href="mailto:hello@airbrickinfra.com" class="link-arrow link-arrow--light"><i class="ph-light ph-envelope-simple"></i> hello@airbrickinfra.com</a>
+            </div>
+          </div>
+          <div class="cta__media">
+            <img src="a2.png" alt="University library delivered by AirBrick" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a href="#top" class="brand">
+            <img class="brand__logo" src="Airbrick_Logo.png" alt="" />
+          </a>
+          <p><b>From campus vision to operational reality.</b><br />Foreign university campuses in India — cohort-ready, under one contract.</p>
+        </div>
+        <div class="footer__col">
+          <h4>Explore</h4>
+          <a href="#challenge">Challenge</a>
+          <a href="#model">Model</a>
+          <a href="#capabilities">Capabilities</a>
+          <a href="#clients">Track Record</a>
+        </div>
+        <div class="footer__col">
+          <h4>Locations</h4>
+          <span>New Delhi</span>
+          <span>Bengaluru</span>
+          <span>Mumbai</span>
+          <span>Gurugram</span>
+          <span>Dubai · Birmingham</span>
+        </div>
+        <div class="footer__col">
+          <h4>Contact</h4>
+          <a href="mailto:hello@airbrickinfra.com">hello@airbrickinfra.com</a>
+          <span class="footer__ph">[phone]</span>
+          <div class="socials">
+            <a href="#" aria-label="LinkedIn"><i class="ph-light ph-linkedin-logo"></i></a>
+            <a href="#" aria-label="Instagram"><i class="ph-light ph-instagram-logo"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__word" aria-hidden="true">AIRBRICK</div>
+      <div class="footer__bottom">
+        <span>© 2026 AirBrick. All rights reserved.</span>
+        <a href="#top" class="to-top">Back to top <i class="ph ph-arrow-up"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ LIGHTBOX ============ -->
+  <div class="lightbox" aria-hidden="true" role="dialog" aria-label="Project viewer">
+    <button class="lightbox__close" aria-label="Close"><i class="ph-light ph-x"></i></button>
+    <button class="lightbox__arrow lightbox__prev" aria-label="Previous"><i class="ph-light ph-arrow-left"></i></button>
+    <figure class="lightbox__fig">
+      <img src="" alt="" />
+      <figcaption><b></b><span></span></figcaption>
+    </figure>
+    <button class="lightbox__arrow lightbox__next" aria-label="Next"><i class="ph-light ph-arrow-right"></i></button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
