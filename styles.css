@@ -960,3 +960,14 @@ html { -webkit-tap-highlight-color: transparent; }
   .field input, .field select { height: 32px; }
   .field--select i { top: 23px; }
 }
+
+/* ---------- Big word: show the full AIRBRICK word above the photo ---------- */
+.bigword__frame { margin-top: clamp(18px, 2.4vw, 36px); }
+.bigword__text { line-height: 0.9; background: linear-gradient(180deg, rgba(22, 94, 96, 0.34) 0%, rgba(22, 94, 96, 0.14) 100%); -webkit-background-clip: text; background-clip: text; }
+
+/* ---------- Mobile menu: links start under the nav, not at the bottom ---------- */
+.menu { align-items: flex-start; padding-top: 112px; overflow-y: auto; }
+.menu { flex-direction: column; justify-content: space-between; gap: 40px; }
+.menu__foot { width: 100%; display: flex; flex-direction: column; gap: 12px; padding-top: 22px; border-top: 1px solid var(--line); }
+.menu__foot a { display: inline-flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 500; color: var(--ink-2); }
+.menu__foot i { font-size: 18px; color: var(--teal); }
